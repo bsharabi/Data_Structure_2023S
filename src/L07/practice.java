@@ -3,253 +3,192 @@ package L07;
 import java.util.*;
 
 public class practice {
+
+    public static final String ANSI_BLACK = "\u001B[30m";
+
+    static String[] colors = {"\u001B[0m", "\u001B[30m", "\u001B[31m", "\u001B[32m", "\u001B[33m", "\u001B[34m", "\u001B[35m", "\u001B[36m", "\u001B[37m"};
+
     public static void main(String[] args) throws Exception {
 
-        Object[] objects = {"bob", "alice"};
-        System.out.println(objects);
-        Object[] temp = new Object[3];
-        for (int i = 0; i < objects.length; i++) {
-            temp[i] = objects[i];
-        }
-        temp[2] = "I";
-        System.out.println(temp);
-        objects = temp;
-        System.out.println(objects);
-        temp = null;
 
-        myArrayList myArrayList = new myArrayList(1);
-        System.out.println(myArrayList);
-        myArrayList myArrayList1 = null;
-        try {
-            myArrayList1 = new myArrayList(-9);
-            System.out.println(myArrayList1);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Hello catch");
-        }
-        System.out.println(myArrayList1);
+        System.out.println("------------------sortWithArray-------------------");
+        int[] arr = {-2, 6, 0, -1, 9, -3, 7};
+        Queue<Integer> queue = new LinkedList<>();
+        for (int next : arr)
+            queue.add(next);
+        System.out.println(queue);
+        sortWithArray(queue);
+        System.out.println(queue);
 
+
+        System.out.println("------------------sortWithArray-------------------");
+        Queue<Integer> queue2 = new LinkedList<>();
+        for (int next : arr)
+            queue2.add(next);
+
+        System.out.println(queue2);
+        sortWithQueue(queue2);
+        System.out.println(queue2);
+
+        buildSimulator();
+
+        Queue<Integer> queue3 = new LinkedList<>();
+        for (int i = 0; i < 10; i++)
+            queue3.add(i);
+
+
+        System.out.println(queue3);
+        lott(queue3);
+
+    }
+
+    private static int lott(Queue<Integer> queue3) {
         Random rd = new Random();
-        myArrayList myArrayListMax = new myArrayList(20);
-        for (int i = 0; i < 30; i++) {
-            myArrayListMax.add(rd.nextInt(250));
-        }
-
-        System.out.println(myArrayListMax);
-//        Thread.sleep(5000);
-        System.out.println(Thread.currentThread());
-        System.out.println(myArrayListMax.max());
-
-        myArrayList myArrayListMax2 = new myArrayList(new int[]{300,400,500});
-//        for (int i = 0; i < 3; i++) {
-//            myArrayListMax2.add(rd.nextInt(250));
-//        }
-        System.out.println(myArrayListMax2);
-//        Thread.sleep(5000);
-        System.out.println(myArrayListMax2.max());
-
-//        ArrayList arrayList = new ArrayList();
-//        LinkedList linkedList = new LinkedList();
-
-        List linkedList = new LinkedList();
-        List arrayList = new ArrayList();
-        f(myArrayList);
-
-
-    }
-
-    public static void f(List l){
-
-
-    }
-}
-
-class myArrayList implements List {
-
-    private Object[] myArray;
-    private int index = 0;
-    private int max = Integer.MIN_VALUE;
-    private int sum=0;
-    private double avg=0;
-
-
-    public myArrayList(int capacity) {
-        if (capacity < 0)
-            throw new IllegalArgumentException();
-        else if (capacity == 0)
-            myArray = new Object[10];
-        else
-            myArray = new Object[capacity];
-
-    }
-
-    public myArrayList() {
-        myArray = new Object[10];
-    }
-
-    public myArrayList(int[] arr) {
-        if (arr == null)
-            throw new IllegalArgumentException();
-        else if (arr.length == 0)
-            myArray = new Object[10];
-        else {
-            myArray = new Object[arr.length];
-            for (int i = 0; i < arr.length; i++) {
-                if(max<arr[i])
-                    max=arr[i];
-                sum+=arr[i];
-                myArray[i] = arr[i];
+        int lastItem = 0;
+        //(n)
+        while (!queue3.isEmpty()) {
+            int k = rd.nextInt(8) + 2;
+            //O(10)
+            for (int i = 1; i < k; i++) {
+                int remove = queue3.poll();
+                queue3.add(remove);
             }
-            index = arr.length;
+            lastItem = queue3.poll();
+        }
+        return lastItem;
+        //O(10n)-> O(n)
+    }
+
+    private static void buildSimulator() throws Exception {
+        Scanner sc = new Scanner(System.in);
+        Random rd = new Random();
+        System.out.println("\n\n\n\n");
+        MyQueue_<Integer> q = new MyQueue_<>();
+        int i = 0;
+        String ch;
+        System.out.println("-----------------add----------------");
+        while (true) {
+            ch = sc.nextLine();
+            if (ch.equals("-1"))
+                break;
+            System.out.println(q);
+            if (q.add(rd.nextInt(10))) {
+                i = (i + 1) % q.capacity();
+                move("f", i);
+            } else {
+                move("f", i);
+            }
+
+        }
+        System.out.println("-----------------poll----------------");
+        i = 0;
+        while (true) {
+            ch = sc.nextLine();
+            if (ch.equals("-1"))
+                break;
+            try {
+                q.poll();
+                System.out.println(q);
+                move("l", i + 1);
+                i = (i + 1) % q.capacity();
+            } catch (Exception e) {
+                move("l", i + 1);
+            }
         }
     }
 
+    private static void move(String symbol, int index) {
+        Random rd = new Random();
+        System.out.print(colors[rd.nextInt(colors.length)]);
+        for (int i = 0; i <= index * 3; i++)
+            System.out.print(" ");
+        System.out.println("^");
+        for (int i = 0; i <= index * 3; i++)
+            System.out.print(" ");
+        System.out.println("|");
+        for (int i = 0; i <= index * 3; i++)
+            System.out.print(" ");
+        System.out.println("|");
+        for (int i = 0; i <= index * 3; i++)
+            System.out.print(" ");
+        System.out.println(symbol);
+        for (int i = 0; i <= index * 3; i++)
+            System.out.print(" ");
+        System.out.println(ANSI_BLACK);
+    }
 
+    //O(n)
+    private static void sortWithArray(Queue<Integer> queue) {
+        //O(1)
+        if (queue == null)
+            return;
+        //O(1)
+        ArrayList<Integer> pos = new ArrayList<>();
+        //O(1)
+        ArrayList<Integer> neg = new ArrayList<>();
+        //O(1)
+        int countZero = 0;
 
-    private void init() {
-        Object[] temp = new Object[index * 2];
-        for (int i = 0; i < myArray.length; i++) {
-            temp[i] = myArray[i];
+        //O(n)
+        while (!queue.isEmpty()) {
+            int item = queue.poll();
+            if (item > 0)
+                pos.add(item);
+            else if (item < 0)
+                neg.add(item);
+            else
+                countZero++;
         }
-        myArray = temp;
+
+        //O(n)
+        for (int i = 0; i < neg.size(); i++)
+            queue.add(neg.get(i));
+
+        //O(n)
+        for (int i = 0; i < countZero; i++)
+            queue.add(0);
+
+        //O(n)
+        for (int i = 0; i < pos.size(); i++)
+            queue.add(pos.get(i));
+
 
     }
 
-    public Object max() {
-        return max;
-    }
+    //O(n)
+    private static void sortWithQueue(Queue<Integer> queue) {
+        //O(1)
+        if (queue == null)
+            return;
+        //O(1)
+        Queue<Integer> pos = new LinkedList<>();
+        //O(1)
+        Queue<Integer> neg = new LinkedList<>();
+        //O(1)
+        int countZero = 0;
 
-    public Object avg(){
-        if(index==0)
-            return 0;
-        return (double)sum /index ;
-    }
+        //O(n)
+        while (!queue.isEmpty()) {
+            int item = queue.poll();
+            if (item > 0)
+                pos.add(item);
+            else if (item < 0)
+                neg.add(item);
+            else
+                countZero++;
+        }
 
-    @Override
-    public String toString() {
-        return Arrays.toString(myArray);
+        //O(n)
+        while (!neg.isEmpty())
+            queue.add(neg.poll());
 
-    }
+        //O(n)
+        for (int i = 0; i < countZero; i++)
+            queue.add(0);
 
-    @Override
-    public int size() {
-        return 0;
-    }
+        //O(n)
+        while (!pos.isEmpty())
+            queue.add(pos.poll());
 
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
-    public Iterator iterator() {
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public boolean add(Object item) {
-        if ((int) item > max)
-            max = (int) item;
-
-        sum+=(int)item;
-        if (index == myArray.length)
-            init();
-        myArray[index] = item;
-        index++;
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public Object get(int index) {
-        return null;
-    }
-
-    @Override
-    public Object set(int index, Object element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, Object element) {
-
-    }
-
-    @Override
-    public Object remove(int index) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public ListIterator listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public List subList(int fromIndex, int toIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
     }
 }

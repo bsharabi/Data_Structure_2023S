@@ -1,7 +1,6 @@
-package L10;
+package L08;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class Main2 {

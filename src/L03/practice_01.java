@@ -1,9 +1,9 @@
-package L04;
+package L03;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class practice {
+public class practice_01 {
 
     public static void main(String[] args) {
         // {1,5,100,9,8}

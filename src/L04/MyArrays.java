@@ -1,4 +1,4 @@
-package L06;
+package L04;
 
 public  class MyArrays {
     private MyArrays() {

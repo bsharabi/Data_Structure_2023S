@@ -1,4 +1,4 @@
-package L06;
+package L04;
 
 public class GenericsFewType {
     static <T, S> void IsEq(T n1, S n2) {

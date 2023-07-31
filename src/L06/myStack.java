@@ -1,4 +1,4 @@
-package L08;
+package L06;
 
 import java.util.Arrays;
 
