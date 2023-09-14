@@ -1,4 +1,4 @@
-package L08;
+package L08.SemesterBExample;
 
 public class Main {
     protected int value = 6;

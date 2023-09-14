@@ -1,4 +1,4 @@
-package L08;
+package L08.SemesterBExample;
 
 import java.util.ArrayList;
 import java.util.Stack;

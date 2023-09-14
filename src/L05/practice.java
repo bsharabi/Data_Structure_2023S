@@ -17,11 +17,11 @@ public class practice {
         System.out.println(objects);
         temp = null;
 
-        myArrayList myArrayList = new myArrayList(1);
+        myArrayListT myArrayList = new myArrayListT(1);
         System.out.println(myArrayList);
-        myArrayList myArrayList1 = null;
+        myArrayListT myArrayList1 = null;
         try {
-            myArrayList1 = new myArrayList(-9);
+            myArrayList1 = new myArrayListT(-9);
             System.out.println(myArrayList1);
         } catch (IllegalArgumentException e) {
             System.out.println("Hello catch");
@@ -29,7 +29,7 @@ public class practice {
         System.out.println(myArrayList1);
 
         Random rd = new Random();
-        myArrayList myArrayListMax = new myArrayList(20);
+        myArrayListT myArrayListMax = new myArrayListT(20);
         for (int i = 0; i < 30; i++) {
             myArrayListMax.add(rd.nextInt(250));
         }
@@ -39,7 +39,7 @@ public class practice {
         System.out.println(Thread.currentThread());
         System.out.println(myArrayListMax.max());
 
-        myArrayList myArrayListMax2 = new myArrayList(new int[]{300,400,500});
+        myArrayListT myArrayListMax2 = new myArrayListT(new int[]{300,400,500});
 //        for (int i = 0; i < 3; i++) {
 //            myArrayListMax2.add(rd.nextInt(250));
 //        }
@@ -63,7 +63,7 @@ public class practice {
     }
 }
 
-class myArrayList implements List {
+class myArrayListT implements List {
 
     private Object[] myArray;
     private int index = 0;
@@ -72,7 +72,7 @@ class myArrayList implements List {
     private double avg=0;
 
 
-    public myArrayList(int capacity) {
+    public myArrayListT(int capacity) {
         if (capacity < 0)
             throw new IllegalArgumentException();
         else if (capacity == 0)
@@ -82,11 +82,11 @@ class myArrayList implements List {
 
     }
 
-    public myArrayList() {
+    public myArrayListT() {
         myArray = new Object[10];
     }
 
-    public myArrayList(int[] arr) {
+    public myArrayListT(int[] arr) {
         if (arr == null)
             throw new IllegalArgumentException();
         else if (arr.length == 0)
